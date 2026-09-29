@@ -17,8 +17,8 @@
 
 ## 지금 단계
 
-**파일럿(v2)** 을 돌려 진행 여부를 판정하는 중이다. 본실험은 판정 후 시작한다.
-파일럿 사용법은 `README.md`.
+**파일럿(v4)** 을 아직 실행하지 않았다. 측정된 수치는 없다.
+파일럿 사용법은 `docs/PILOT.md`, 프로젝트 개요는 `README.md`.
 
 ```bash
 python3 prepare.py                              # 문항 20개 생성
@@ -52,6 +52,7 @@ export MODEL_JUDGE="..."        # 기본값 = MODEL_EXPENSIVE
 | `grade.py` | 앵커 채점 — GSM8K 숫자 비교, MBPP 단위테스트 실행 |
 | `judge.py` | 심판 — 쌍대 비교(순서 뒤집어 2회), 체크리스트 채점 |
 | `openended_items.py` | 개방형 10문항 + 체크리스트 (파일럿용 대체 문항) |
+| `perturb.py` | 엉성함 8축 생성기 (규칙 4 + LLM 4). 규칙 축은 시드 고정 재현 |
 | `prepare.py` | 문항 구성 → `items.json`, `novice_TODO.csv` |
 | `run_pilot.py` | 실행 → `runs.jsonl` |
 | `analyze.py` | 요약 + 판정 |
