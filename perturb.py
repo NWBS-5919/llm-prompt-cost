@@ -21,8 +21,16 @@ from llm import chat
 SEED = 20260922
 
 # 앵커는 D3(지시어 모호)를 쓰지 않는다 — 수학 문제에 "그거"가 어색하다
-ANCHOR_AXES = ["S1", "S2", "S3", "D1", "D2", "E1", "E2"]
-OPEN_AXES = ["S1", "S2", "S3", "D1", "D2", "D3", "E1", "E2"]
+ALL_ANCHOR_AXES = ["S1", "S2", "S3", "D1", "D2", "E1", "E2"]
+ALL_OPEN_AXES = ["S1", "S2", "S3", "D1", "D2", "D3", "E1", "E2"]
+
+# 실제로 실행하는 축 — 마감 압박으로 가족별 1개씩만 (DECISIONS.md D-14)
+#   S1 표면(규칙) · D1 결핍(LLM) · E2 과잉(규칙)
+# 여유가 생기면 되살릴 순서: D2 → E1 → S3
+ACTIVE_AXES = ["S1", "D1", "E2"]
+
+ANCHOR_AXES = [a for a in ACTIVE_AXES if a in ALL_ANCHOR_AXES]
+OPEN_AXES = [a for a in ACTIVE_AXES if a in ALL_OPEN_AXES]
 
 FAMILY = {"S1": "표면", "S2": "표면", "S3": "표면",
           "D1": "결핍", "D2": "결핍", "D3": "결핍",

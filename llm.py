@@ -78,8 +78,18 @@ def _fake(model_key, messages, item, tag):
         out = json.dumps([_rng.choice([0, 1, 1]) for _ in range(k)])
         return out, n_in, 20
 
-    good = ("expensive" in model_key) or ("다듬은" in txt) or ("step by step" in txt.lower())
-    p = 0.85 if good else 0.50
+    # 배관 점검용 난이도 흉내. 조건 이름(tag="cond:<조건>")을 보고 축마다 값을 다르게 준다.
+    # 목적은 분석이 기대한 패턴(결핍 > 과잉 > 표면 순으로 비싸다)을 제대로 집어내는지
+    # 확인하는 것뿐이다. **여기서 나온 수치를 결과로 읽지 말 것.**
+    cond = tag[5:] if tag.startswith("cond:") else ""
+    p = {"S1": 0.80, "S2": 0.80, "S3": 0.75,        # 표면 잡음 — 거의 안 깎인다
+         "E1": 0.70, "E2": 0.70,                    # 정보 과잉 — 주로 토큰을 먹는다
+         "D1": 0.45, "D2": 0.50, "D3": 0.45,        # 정보 결핍 — 가장 치명적
+         "ko_human": 0.40,                          # 자연복합 — 여러 축이 겹침
+         }.get(cond, 0.85)                          # 기준선·en_expert·refined
+    if "expensive" in model_key:
+        p = min(0.95, p + 0.15)                     # 고가 모델이 엉성함에 더 강건
+    good = p >= 0.70
     hit = _rng.random() < p
     task = (item or {}).get("task", "gsm8k")
     if task == "gsm8k":

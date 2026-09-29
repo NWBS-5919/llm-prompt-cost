@@ -44,40 +44,52 @@ REWRITE_SYS = ("너는 사용자의 질문을 AI가 더 잘 처리할 수 있게
 
 
 def build_variants(item, human_map):
-    """{조건명: 프롬프트}, 기준선 이름, 자연복합 이름, 심판에게 줄 의도"""
+    """{조건명: 프롬프트}, 기준선 이름, 자연복합 이름, 심판에게 줄 의도, 준비 비용
+
+    준비 비용(번역·재작성 호출의 토큰)을 함께 돌려준다. 재작성 토큰은 Part B의
+    총비용에 들어가므로 버리면 손익분기를 사후에 계산할 수 없다.
+
+    축 변형은 **질문 본문에만** 적용하고 채점 지시문은 그 뒤에 붙인다.
+    지시문까지 망가뜨리면 모델이 '정답:' 형식을 안 써서 grade.py 가 폴백으로
+    떨어지고, 축의 대가와 채점 실패가 섞인다. 지시문 제거는 D2 전용 축이다.
+    """
     if item["kind"] == "anchor":
-        ko, _, _ = chat("judge", [{"role": "system", "content": TRANSLATE_SYS},
-                                  {"role": "user", "content": item["question"]}],
-                        item=item, tag="translate")
-        base = ko.strip() + KO_INSTR
-        v = {"en_expert": item["question"] + EN_INSTR, "ko_expert": base}
+        ko, tin, tout = chat("judge", [{"role": "system", "content": TRANSLATE_SYS},
+                                       {"role": "user", "content": item["question"]}],
+                             item=item, tag="translate")
+        body = ko.strip()
+        setup = {"translate": {"tokens_in": tin, "tokens_out": tout}}
+        v = {"en_expert": item["question"] + EN_INSTR, "ko_expert": body + KO_INSTR}
         for a in P.ANCHOR_AXES:
-            v[a] = P.apply_axis(a, base, item)
+            # D2(지시 부재) = 지시문을 붙이지 않는다. 나머지는 본문만 변형 후 지시문 유지
+            v[a] = body if a == "D2" else P.apply_axis(a, body, item) + KO_INSTR
         v["ko_human"] = human_map.get(item["id"], item["question"][:60])
-        return v, "ko_expert", "ko_human", item["question"]
+        return v, "ko_expert", "ko_human", item["question"], setup
 
     original = item["user_prompt"]
     if item["task"] == "summarize":
         original = item["doc"] + "\n\n" + original
-    ref, _, _ = chat("rewriter", [{"role": "system", "content": REWRITE_SYS},
-                                  {"role": "user", "content": original}],
-                     item=item, tag="rewrite")
+    ref, tin, tout = chat("rewriter", [{"role": "system", "content": REWRITE_SYS},
+                                       {"role": "user", "content": original}],
+                          item=item, tag="rewrite")
+    setup = {"rewrite": {"tokens_in": tin, "tokens_out": tout}}
     base = ref.strip()
     v = {"refined": base}
     for a in P.OPEN_AXES:
         v[a] = P.apply_axis(a, base, item)
     v["original"] = original
-    return v, "refined", "original", item["user_prompt"]
+    return v, "refined", "original", item["user_prompt"], setup
 
 
-def run_condition(item, text, model_key):
+def run_condition(item, text, model_key, cond=""):
     msgs = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": text}]
     tin = tout = 0
     correct = None
     final = ""
     turns = 1
     for t in range(MAX_TURNS):
-        out, a, b = chat(model_key, msgs, item=item)
+        # cond 는 --fake 가 축을 구분하는 데만 쓰인다. 실제 호출에는 영향이 없다.
+        out, a, b = chat(model_key, msgs, item=item, tag=f"cond:{cond}")
         tin += a; tout += b; final = out; turns = t + 1
         if item["kind"] != "anchor":
             break
@@ -116,16 +128,18 @@ def main():
                 print(f"  [{n:>2}/{len(items)}] {item['id']:<10} 건너뜀(완료)")
                 continue
 
-            variants, base_k, nat_k, intent = build_variants(item, human)
+            variants, base_k, nat_k, intent, setup = build_variants(item, human)
             rec = {"id": item["id"], "task": item["task"], "kind": item["kind"],
                    "base": base_k, "natural": nat_k, "intent": intent,
+                   "axes": list(P.ACTIVE_AXES),
                    "prompts": variants,
                    "prompt_len": {k: len(v) for k, v in variants.items()},
+                   "setup": setup,
                    "ts": time.strftime("%Y-%m-%dT%H:%M:%S"), "cond": {}, "judge": {}}
 
             for mk in ("cheap", "expensive"):
                 for c, text in variants.items():
-                    rec["cond"][f"{mk}/{c}"] = run_condition(item, text, mk)
+                    rec["cond"][f"{mk}/{c}"] = run_condition(item, text, mk, c)
 
             for mk in ("cheap", "expensive"):
                 a = rec["cond"][f"{mk}/{nat_k}"]["answer"]
