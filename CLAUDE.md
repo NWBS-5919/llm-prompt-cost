@@ -10,22 +10,35 @@
 일반 사용자가 AI에 **엉성하게 묻기 때문에 치르는 대가**를 측정하고,
 질문을 다듬는 비용까지 예산에 넣어 **언제 다듬고 어느 모델을 쓸지**를 최적화한다.
 
-전체 기획은 `docs/PROJECT.md`, 실험 규격은 `docs/EXPERIMENT.md`,
-왜 이렇게 정해졌는지는 `docs/DECISIONS.md` 에 있다. **작업 전에 이 세 개를 먼저 읽을 것.**
+프로젝트 개요는 `README.md`, 전체 기획은 `docs/PROJECT.md`, 실험 규격은
+`docs/EXPERIMENT.md`, 왜 이렇게 정해졌는지는 `docs/DECISIONS.md`,
+파일럿 실행은 `docs/PILOT.md` 에 있다. **작업 전에 먼저 읽을 것.**
 
 ---
 
 ## 지금 단계
 
-**파일럿(v4)** 을 아직 실행하지 않았다. 측정된 수치는 없다.
-파일럿 사용법은 `docs/PILOT.md`, 프로젝트 개요는 `README.md`.
+**아직 한 번도 실행하지 않았다. 측정된 수치는 없다.**
+9/22–28 진행이 없어 7일 밀렸고, 그래서 **파일럿과 본실험을 하나로 합쳤다**
+(D-14). 한 번 실행해 그 수치를 논문에 쓴다.
+
+축소 확정 — **3축**(S1·D1·E2) · 문항 20 · 모델 2등급 · 개방형은 연구자 작성 문항.
+
+**주의 — 축 축소는 아직 코드에 없다.** `perturb.py` 가 8축 그대로이므로 지금 실행하면
+8축을 돈다. 실행 전 필수 수정 목록은 `docs/EXPERIMENT.md` 2절 "구현 상태" 에 있다.
 
 ```bash
-python3 prepare.py                              # 문항 20개 생성
-# novice_TODO.csv 의 novice_ko 열을 사람이 채운다 (앵커 10개만)
+python3 grade.py                                    # 채점기 자가 점검, 무과금
+python3 perturb.py                                  # 규칙 축 출력 확인, 무과금
+python3 prepare.py                                  # 문항 20개 생성
+# novice_TODO.csv 의 novice_ko 열을 두 사람이 각자 채운다 (앵커 10개만)
 python3 run_pilot.py --fake && python3 analyze.py   # 배관 점검, 무과금
-rm -f runs.jsonl && python3 run_pilot.py && python3 analyze.py
+python3 run_pilot.py && python3 analyze.py          # 실제 실행
 ```
+
+`--fake` 로 만든 `runs.jsonl` 은 실제 실행 전에 **지우지 말고 옮겨 둘 것**
+(`mv runs.jsonl runs_fake.jsonl`). 중단 복구가 완료 id를 보고 이어 달리기 때문에
+가짜 결과가 섞이면 실제 실행이 건너뛰어진다.
 
 ---
 
@@ -89,6 +102,10 @@ export MODEL_JUDGE="..."        # 기본값 = MODEL_EXPENSIVE
 | 429 / 레이트리밋 | `llm.py` 의 `_real` 이 지수 백오프로 5회 재시도. 그래도 막히면 동시 실행을 줄인다 |
 | 심판이 계속 무승부 | 순서 뒤집기에서 판정이 뒤집히는 중(위치 편향). 심판 모델을 키우거나 프롬프트를 손본다 |
 | 개방형 토큰이 되레 늘어남 | 정상일 수 있다. 다듬으면 답이 길어지는 경우가 있고, 그 자체가 결과다 |
+| 축별 대가가 전부 비슷하게 나옴 | `--fake` 였는지 확인. 가짜 모델은 축을 구분하지 않아 전부 노이즈로 찍힌다 |
+| 문항이 전부 건너뛰어짐 | `runs.jsonl` 에 이전(가짜) 실행이 남아 있다. 파일명을 바꿔 옮긴다 |
+| Part B 비용이 계산 안 됨 | 재작성 호출 토큰이 `runs.jsonl` 에 저장되는지 확인. 버리면 재실행해야 한다 |
+| 축 변형이 채점 지시문까지 망가뜨림 | 규칙 축은 본문에만 적용하고 지시문은 나중에 붙여야 한다. 안 그러면 축의 대가와 채점 실패가 섞인다 |
 
 ---
 
