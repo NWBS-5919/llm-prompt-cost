@@ -1,0 +1,29 @@
+# 비밀 — API 키
+env.txt
+env_*.txt
+.env
+
+# GSM-Symbolic(CC BY-NC-ND 4.0) 번역·변형이 들어 있어 외부에 배포하지 않는다 (D-15)
+runs*.jsonl
+items.json
+human_TODO.csv
+data/*
+!data/excluded_items.json
+
+# 다시 받을 수 있는 원 데이터 (prepare.py 대체 경로)
+gsm8k_test.jsonl
+mbpp.jsonl
+
+# analyze.py · partc.py 가 작업 폴더에 쓰는 산출물 — 확정본은 results/ 에 둔다
+/cells.csv
+/table1.csv
+/partc_sim.json
+
+# 실행 로그
+logs/
+
+__pycache__/
+*.pyc
+*.tmp
+.DS_Store
+figures/
