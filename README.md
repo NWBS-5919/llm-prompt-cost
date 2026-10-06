@@ -97,6 +97,7 @@ python3 run_main.py && python3 analyze.py && python3 partc.py      # 본실험 (
 | `regrade.py` | 채점 보정 — '정답:' 형식 없는 답의 최종 숫자를 LLM 으로 추출 (D-37) |
 | `typo_robustness.py` | 오타 일반성 — 등급 밖 모델 3개에 기준선·오타 3단계 (D-38 ②) → `runs_typo.jsonl` |
 | `voi_map.py` · `voi_curve.py` | 결정 지도(심한 오타 비율 × 예산) · 보정 문항 수별 정보 가치 (D-38 ④, D-39) |
+| `figures.py` | 포스터 그림 3장 → `results/figures/` (API 호출 없음) |
 | `redo_d1.py` · `migrate_tiers.py` | 진행 중 설계 변경 때 쓴 일회성 이전 스크립트 (D-29, D-33) |
 | `사고모드테스트.py` | 사고 모드 끄는 옵션 시험 (D-27) |
 
@@ -106,6 +107,7 @@ python3 run_main.py && python3 analyze.py && python3 partc.py      # 본실험 (
 
 | 파일 | 내용 |
 |---|---|
+| `results/figures/` | 포스터 그림 3장 (`figures.py`): 오타 덤벨 · 재작성 비용-효과 평면 · 정보 가치 상한 vs 실현 |
 | `results/본실험_결과.txt` | analyze.py 전체 출력 (99문항) |
 | `results/partc_결과.txt` · `results/partc_sim.json` | Part C 시뮬레이션 |
 | `results/오타일반성_결과.txt` | 6개 모델 오타 용량-반응 |
