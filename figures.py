@@ -109,14 +109,14 @@ def fig2():
     fig, ax = plt.subplots(figsize=(8.6, 5.0))
     fig.subplots_adjust(left=0.11, right=0.97, top=0.80, bottom=0.12)
     ax.axhline(0, color=BASE, linewidth=1.0, zorder=1)
-    focus = {"S1_hi": "오타 20%", "N1": "그럴듯한 무관 정보"}
+    focus = {"S1_hi": "오타 20%", "N1": "그럴듯한 무관 정보", "D2": "지시 제거"}
     for v, x, xci, y, yci in sorted(pts, key=lambda t: t[0] in focus):
         c = ACCENT if v in focus else MUTED
         ax.plot([xci[0], xci[1]], [y, y], color=c, linewidth=1.1, alpha=0.55 if v not in focus else 0.9, zorder=2)
         ax.plot([x, x], [yci[0], yci[1]], color=c, linewidth=1.1, alpha=0.55 if v not in focus else 0.9, zorder=2)
         ax.scatter([x], [y], s=60 if v in focus else 38, color=c, edgecolors=SURF, linewidths=2, zorder=3)
         if v in focus:
-            tx, ty = {"S1_hi": (8, -12), "N1": (8, 15)}[v]          # 점 구름의 왼쪽 빈 곳 (데이터 좌표)
+            tx, ty = {"S1_hi": (8, -12), "N1": (8, 15), "D2": (108, 15)}[v]          # 점 구름의 왼쪽 빈 곳 (데이터 좌표)
             ax.annotate(f"{focus[v]}\n{y:+.1f}%p [{yci[0]:+.1f}, {yci[1]:+.1f}]", (x, y), xytext=(tx, ty),
                         textcoords="data", fontsize=9.5, color=INK, va="center",
                         arrowprops=dict(arrowstyle="-", color=MUTED, linewidth=0.8, shrinkA=2, shrinkB=5))
@@ -126,7 +126,7 @@ def fig2():
     ax.set_ylabel("정답률 변화 (%p)")
     ax.set_ylim(-20, 20)
     grid(ax, "both")
-    ax.text(148, -18.5, "회색: 나머지 7개 조건 (기준선·오타 5/10%·잡음 약/강·지시 제거·맥락 누락)",
+    ax.text(148, -18.5, "회색: 나머지 6개 조건 (기준선·오타 5/10%·잡음 약/강·맥락 누락)",
             ha="right", fontsize=8.8, color=MUTED)
     title(fig, "질문을 다듬으면 비용은 늘지만 정답률은 유의하게 오르지 않는다",
           "저가 모델(gemma-3-27b) · 재작성기 qwen3.8-flash · 점 = 평균, 선 = 95% 부트스트랩 구간 (99문항)")
@@ -169,7 +169,7 @@ def fig3():
     axes[0].scatter([], [], s=22, color=BLUE_PALE, label="무작위 보정 표본 (5회)")
     axes[0].plot([], [], color=ACCENT, linewidth=2, marker="o", markersize=7, label="평균 (49 = 전체 학습 문항)")
     axes[0].legend(loc="lower left", frameon=False, fontsize=9, labelcolor=INK2)
-    title(fig, "결함 정보의 가치는 있지만, 보정 49문항으로는 상한의 절반 수준이거나 오히려 손해다",
+    title(fig, "결함 정보의 가치는 분명하지만, 보정 49문항으로는 대부분 실현되지 않는다",
           "예산 = 전부 고가 비용의 20% · 결함 인식 - 결함 무시 입찰가격 정책 · 모의 하루 200일 × 40문항")
     fig.savefig(OUT / "fig3_voi.png", dpi=300)
     plt.close(fig)

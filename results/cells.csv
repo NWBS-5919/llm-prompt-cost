@@ -30,10 +30,10 @@ m000,train,lo,E2_hi,rw,cheap,0,213,0.16381
 m000,train,lo,E2_hi,rw,mid,1,246,0.20087
 m000,train,lo,E2_hi,rw,expensive,1,243,1.7152999999999998
 m000,train,lo,D2,raw,cheap,0,300,0.12258
-m000,train,lo,D2,raw,mid,0,369,0.18408
+m000,train,lo,D2,raw,mid,1,369,0.18408
 m000,train,lo,D2,raw,expensive,1,292,1.894
 m000,train,lo,D2,rw,cheap,0,318,0.18331
-m000,train,lo,D2,rw,mid,0,453,0.27762000000000003
+m000,train,lo,D2,rw,mid,1,453,0.27762000000000003
 m000,train,lo,D2,rw,expensive,1,266,1.81981
 m000,train,lo,D1,raw,cheap,1,294,0.12277
 m000,train,lo,D1,raw,mid,1,313,0.16046
@@ -1207,7 +1207,7 @@ m020,test,lo,HUMAN_A,rw,mid,1,550,0.3596
 m020,test,lo,HUMAN_A,rw,expensive,1,271,1.99165
 m020,test,lo,HUMAN_B,raw,cheap,1,191,0.07921
 m020,test,lo,HUMAN_B,raw,mid,1,407,0.19984
-m020,test,lo,HUMAN_B,raw,expensive,0,230,1.494
+m020,test,lo,HUMAN_B,raw,expensive,1,230,1.494
 m020,test,lo,HUMAN_B,rw,cheap,0,339,0.19352
 m020,test,lo,HUMAN_B,rw,mid,0,322,0.21828999999999998
 m020,test,lo,HUMAN_B,rw,expensive,0,284,1.9429999999999998
@@ -3038,7 +3038,7 @@ m050,train,hi,E2_hi,rw,expensive,1,332,2.35186
 m050,train,hi,D2,raw,cheap,1,408,0.16804
 m050,train,hi,D2,raw,mid,1,501,0.25122
 m050,train,hi,D2,raw,expensive,1,250,1.71
-m050,train,hi,D2,rw,cheap,0,417,0.24810000000000001
+m050,train,hi,D2,rw,cheap,1,417,0.24810000000000001
 m050,train,hi,D2,rw,mid,1,494,0.32493000000000005
 m050,train,hi,D2,rw,expensive,1,336,2.3363
 m050,train,hi,D1,raw,cheap,1,384,0.16035
@@ -3921,7 +3921,7 @@ m067,train,hi,N1,raw,cheap,1,256,0.12497
 m067,train,hi,N1,raw,mid,1,376,0.20717
 m067,train,hi,N1,raw,expensive,1,310,2.266
 m067,train,hi,N1,rw,cheap,1,260,0.25202
-m067,train,hi,N1,rw,mid,0,451,0.36778
+m067,train,hi,N1,rw,mid,1,451,0.36778
 m067,train,hi,N1,rw,expensive,1,289,2.26166
 m065,test,lo,base,raw,cheap,1,224,0.1015
 m065,test,lo,base,raw,mid,0,379,0.19658
@@ -5042,8 +5042,8 @@ m086,test,lo,E2_hi,rw,expensive,1,359,2.38563
 m086,test,lo,D2,raw,cheap,0,222,0.09216
 m086,test,lo,D2,raw,mid,1,1151,0.54997
 m086,test,lo,D2,raw,expensive,0,248,1.608
-m086,test,lo,D2,rw,cheap,0,390,0.20727
-m086,test,lo,D2,rw,mid,0,640,0.36138
+m086,test,lo,D2,rw,cheap,1,390,0.20727
+m086,test,lo,D2,rw,mid,1,640,0.36138
 m086,test,lo,D2,rw,expensive,1,694,4.37628
 m086,test,lo,D1,raw,cheap,0,199,0.08537
 m086,test,lo,D1,raw,mid,1,760,0.3686
