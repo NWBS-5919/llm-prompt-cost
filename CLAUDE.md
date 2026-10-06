@@ -18,7 +18,8 @@
 
 ## 지금 단계
 
-**본실험 완료 (2026-10-04).** 99문항, 결과는 `results/`. 남은 일은 분석 정리·그림·초록.
+**본실험·채점 보정·오타 일반성·정보 가치 분해 완료 (2026-10-06).** 결과는 `results/`, 정리는 `docs/RESULTS.md`.
+남은 일: 사람 질문 판정(두 사람) → 그림 3장 → 초록. 남은 분석의 판단 규칙은 D-38 에 고정돼 있다 — 바꾸지 말 것.
 
 ```bash
 python3 analyze.py runs.jsonl      # Part A·B → table1.csv, cells.csv (확정본은 results/ 로 복사)
@@ -60,6 +61,9 @@ python3 run_main.py                # 빠진 칸이 있으면 그것만 채운다
 | `analyze.py` | 조작 확인 · G1 · 실측표 · H1 확증(McNemar+Holm) · H2 재작성 · 사람 질문 |
 | `partc.py` | 사후 최적 DP · LP 재풀이 입찰가격 · 결함 정보의 가치 |
 | `prepare.py` | GSM-Symbolic P1 100문항 · 학습/시험 분할 |
+| `regrade.py` | 채점 보정 — 형식 없는 답만 LLM 추출 (D-37). 새 칸이 생기면 다시 돌린다 |
+| `typo_robustness.py` | 오타 일반성 (등급 밖 모델 3개) → `runs_typo.jsonl` (D-38 ②) |
+| `voi_map.py` · `voi_curve.py` | 결정 지도 · 보정 문항 수별 정보 가치 (D-38 ④, D-39) |
 | `redo_d1.py` · `migrate_tiers.py` | 일회성 기록 이전 (D-29, D-33). 다시 돌릴 일 없음 |
 | `judge.py` · `openended_items.py` | v4 개방형(요약) 과제용. v5 에서는 쓰지 않음 |
 
@@ -98,6 +102,8 @@ python3 run_main.py                # 빠진 칸이 있으면 그것만 채운다
 | 한 문항이 끝나지 않음 | 답변 폭주. `MAX_TOKENS` 가 걸려 있는지 |
 | 출력 토큰이 비정상적으로 많음 | `usage.completion_tokens_details.reasoning_tokens` — 사고 모드가 켜졌는지 |
 | `[중단] … 등급 모델이 env.txt 와 다릅니다` | 기록과 설정의 모델이 다름. 이전 스크립트 먼저 |
+| HTTP 429 `120 requests per minute` | 키당 분당 120회. 같은 키로 두 작업을 동시에 돌리지 말 것, `MIN_INTERVAL` 0.6 이상 |
+| 정답을 맞혔는데 오답 처리 | '정답:' 형식이 없는 답 — `regrade.py` 로 보정 |
 | 기록상 사용량 < ChatKHU 사용량 | 실패·시험 호출은 기록에 안 남는다(약 8%). `BUDGET` 을 한도보다 넉넉히 낮게 |
 
 ---

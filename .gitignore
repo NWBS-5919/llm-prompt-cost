@@ -27,3 +27,6 @@ __pycache__/
 *.tmp
 .DS_Store
 figures/
+
+# 팀 검토용 — 번역 문장이 들어 있어 올리지 않는다
+검토/

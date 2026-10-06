@@ -1,0 +1,451 @@
+{
+  "days": 200,
+  "n": 40,
+  "resolve": 5,
+  "mix": {
+    "base": 0.55,
+    "S1_lo": 0.12,
+    "S1_md": 0.06,
+    "S1_hi": 0.020000000000000004,
+    "E2_lo": 0.05000000000000001,
+    "E2_hi": 0.02,
+    "D2": 0.08,
+    "D1": 0.06,
+    "N1": 0.04
+  },
+  "unit_usd": 0.0063159999999999996,
+  "results": [
+    {
+      "budget": 1.0,
+      "sigma": 0.0,
+      "ratio": {
+        "oracle": 1.0,
+        "bp_aware": 0.9839831257885904,
+        "bp_blind": 0.985456880166113,
+        "greedy": 0.88305438745699,
+        "threshold": 0.9411484185621104,
+        "all_exp": 0.9720588757453714,
+        "all_cheap": 0.88305438745699
+      },
+      "stuck_rate": {
+        "oracle": 0.0,
+        "bp_aware": 0.0,
+        "bp_blind": 0.0,
+        "greedy": 0.0,
+        "threshold": 0.0,
+        "all_exp": 0.0,
+        "all_cheap": 0.0
+      },
+      "voi_weighted_correct": [
+        -0.11480973193473297,
+        -0.16670336975524638,
+        -0.06510906031468612
+      ]
+    },
+    {
+      "budget": 1.0,
+      "sigma": 0.1,
+      "ratio": {
+        "oracle": 1.0,
+        "bp_aware": 0.9833190155661751,
+        "bp_blind": 0.985456880166113,
+        "greedy": 0.88305438745699,
+        "threshold": 0.9411484185621104,
+        "all_exp": 0.9720588757453714,
+        "all_cheap": 0.88305438745699
+      },
+      "stuck_rate": {
+        "oracle": 0.0,
+        "bp_aware": 0.0,
+        "bp_blind": 0.0,
+        "greedy": 0.0,
+        "threshold": 0.0,
+        "all_exp": 0.0,
+        "all_cheap": 0.0
+      },
+      "voi_weighted_correct": [
+        -0.16417241309415373,
+        -0.21774474504662045,
+        -0.10991382765785
+      ]
+    },
+    {
+      "budget": 1.0,
+      "sigma": 0.2,
+      "ratio": {
+        "oracle": 1.0,
+        "bp_aware": 0.98318244247278,
+        "bp_blind": 0.985456880166113,
+        "greedy": 0.88305438745699,
+        "threshold": 0.9411484185621104,
+        "all_exp": 0.9720588757453714,
+        "all_cheap": 0.88305438745699
+      },
+      "stuck_rate": {
+        "oracle": 0.0,
+        "bp_aware": 0.0,
+        "bp_blind": 0.0,
+        "greedy": 0.0,
+        "threshold": 0.0,
+        "all_exp": 0.0,
+        "all_cheap": 0.0
+      },
+      "voi_weighted_correct": [
+        -0.17687633272524664,
+        -0.2262219818587223,
+        -0.12851230762896612
+      ]
+    },
+    {
+      "budget": 1.0,
+      "sigma": 0.3,
+      "ratio": {
+        "oracle": 1.0,
+        "bp_aware": 0.9828451299199606,
+        "bp_blind": 0.985456880166113,
+        "greedy": 0.88305438745699,
+        "threshold": 0.9411484185621104,
+        "all_exp": 0.9720588757453714,
+        "all_cheap": 0.88305438745699
+      },
+      "stuck_rate": {
+        "oracle": 0.0,
+        "bp_aware": 0.0,
+        "bp_blind": 0.0,
+        "greedy": 0.0,
+        "threshold": 0.0,
+        "all_exp": 0.0,
+        "all_cheap": 0.0
+      },
+      "voi_weighted_correct": [
+        -0.20020466453836036,
+        -0.24991820588831493,
+        -0.14895630219418357
+      ]
+    },
+    {
+      "budget": 0.6,
+      "sigma": 0.0,
+      "ratio": {
+        "oracle": 1.0,
+        "bp_aware": 0.9375172756657463,
+        "bp_blind": 0.9498648704467553,
+        "greedy": 0.8840937784586024,
+        "threshold": 0.9207133392051277,
+        "all_exp": 0.5786977446570204,
+        "all_cheap": 0.8840937784586024
+      },
+      "stuck_rate": {
+        "oracle": 0.0,
+        "bp_aware": 0.105,
+        "bp_blind": 0.185,
+        "greedy": 0.0,
+        "threshold": 0.065,
+        "all_exp": 0.155,
+        "all_cheap": 0.0
+      },
+      "voi_weighted_correct": [
+        -0.9574398246680819,
+        -1.435120042059386,
+        -0.536371586665142
+      ]
+    },
+    {
+      "budget": 0.6,
+      "sigma": 0.1,
+      "ratio": {
+        "oracle": 1.0,
+        "bp_aware": 0.9373687460087148,
+        "bp_blind": 0.9498648704467553,
+        "greedy": 0.8840937784586024,
+        "threshold": 0.9207133392051277,
+        "all_exp": 0.5786977446570204,
+        "all_cheap": 0.8840937784586024
+      },
+      "stuck_rate": {
+        "oracle": 0.0,
+        "bp_aware": 0.145,
+        "bp_blind": 0.185,
+        "greedy": 0.0,
+        "threshold": 0.065,
+        "all_exp": 0.155,
+        "all_cheap": 0.0
+      },
+      "voi_weighted_correct": [
+        -0.9533257702442453,
+        -1.3303444147157142,
+        -0.5553771021460393
+      ]
+    },
+    {
+      "budget": 0.6,
+      "sigma": 0.2,
+      "ratio": {
+        "oracle": 1.0,
+        "bp_aware": 0.936828040947859,
+        "bp_blind": 0.9498648704467553,
+        "greedy": 0.8840937784586024,
+        "threshold": 0.9207133392051277,
+        "all_exp": 0.5786977446570204,
+        "all_cheap": 0.8840937784586024
+      },
+      "stuck_rate": {
+        "oracle": 0.0,
+        "bp_aware": 0.16,
+        "bp_blind": 0.185,
+        "greedy": 0.0,
+        "threshold": 0.065,
+        "all_exp": 0.155,
+        "all_cheap": 0.0
+      },
+      "voi_weighted_correct": [
+        -1.0033001646903785,
+        -1.3638375472534658,
+        -0.6587967367234182
+      ]
+    },
+    {
+      "budget": 0.6,
+      "sigma": 0.3,
+      "ratio": {
+        "oracle": 1.0,
+        "bp_aware": 0.933543546596771,
+        "bp_blind": 0.9498648704467553,
+        "greedy": 0.8840937784586024,
+        "threshold": 0.9207133392051277,
+        "all_exp": 0.5786977446570204,
+        "all_cheap": 0.8840937784586024
+      },
+      "stuck_rate": {
+        "oracle": 0.0,
+        "bp_aware": 0.185,
+        "bp_blind": 0.185,
+        "greedy": 0.0,
+        "threshold": 0.065,
+        "all_exp": 0.155,
+        "all_cheap": 0.0
+      },
+      "voi_weighted_correct": [
+        -1.2569353172190083,
+        -1.823689684364544,
+        -0.7242224219620914
+      ]
+    },
+    {
+      "budget": 0.35,
+      "sigma": 0.0,
+      "ratio": {
+        "oracle": 1.0,
+        "bp_aware": 0.9193377029324031,
+        "bp_blind": 0.9214013305542298,
+        "greedy": 0.8939512250533703,
+        "threshold": 0.706382693757599,
+        "all_exp": 0.33339196239610674,
+        "all_cheap": 0.8939512250533703
+      },
+      "stuck_rate": {
+        "oracle": 0.0,
+        "bp_aware": 0.21,
+        "bp_blind": 0.335,
+        "greedy": 0.0,
+        "threshold": 0.46,
+        "all_exp": 0.22,
+        "all_cheap": 0.0
+      },
+      "voi_weighted_correct": [
+        -0.1323734721799892,
+        -0.7503182024678177,
+        0.5431002043427641
+      ]
+    },
+    {
+      "budget": 0.35,
+      "sigma": 0.1,
+      "ratio": {
+        "oracle": 1.0,
+        "bp_aware": 0.9202058799254098,
+        "bp_blind": 0.9214013305542298,
+        "greedy": 0.8939512250533703,
+        "threshold": 0.706382693757599,
+        "all_exp": 0.33339196239610674,
+        "all_cheap": 0.8939512250533703
+      },
+      "stuck_rate": {
+        "oracle": 0.0,
+        "bp_aware": 0.22,
+        "bp_blind": 0.335,
+        "greedy": 0.0,
+        "threshold": 0.46,
+        "all_exp": 0.22,
+        "all_cheap": 0.0
+      },
+      "voi_weighted_correct": [
+        -0.07787711817167892,
+        -0.7525886771561724,
+        0.6035425973573556
+      ]
+    },
+    {
+      "budget": 0.35,
+      "sigma": 0.2,
+      "ratio": {
+        "oracle": 1.0,
+        "bp_aware": 0.916363461480846,
+        "bp_blind": 0.9214013305542298,
+        "greedy": 0.8939512250533703,
+        "threshold": 0.706382693757599,
+        "all_exp": 0.33339196239610674,
+        "all_cheap": 0.8939512250533703
+      },
+      "stuck_rate": {
+        "oracle": 0.0,
+        "bp_aware": 0.28,
+        "bp_blind": 0.335,
+        "greedy": 0.0,
+        "threshold": 0.46,
+        "all_exp": 0.22,
+        "all_cheap": 0.0
+      },
+      "voi_weighted_correct": [
+        -0.3761664994425823,
+        -1.079308179791217,
+        0.3743173282152677
+      ]
+    },
+    {
+      "budget": 0.35,
+      "sigma": 0.3,
+      "ratio": {
+        "oracle": 1.0,
+        "bp_aware": 0.9176589247917215,
+        "bp_blind": 0.9214013305542298,
+        "greedy": 0.8939512250533703,
+        "threshold": 0.706382693757599,
+        "all_exp": 0.33339196239610674,
+        "all_cheap": 0.8939512250533703
+      },
+      "stuck_rate": {
+        "oracle": 0.0,
+        "bp_aware": 0.285,
+        "bp_blind": 0.335,
+        "greedy": 0.0,
+        "threshold": 0.46,
+        "all_exp": 0.22,
+        "all_cheap": 0.0
+      },
+      "voi_weighted_correct": [
+        -0.2604062607682134,
+        -0.9863491902934004,
+        0.5162611679715258
+      ]
+    },
+    {
+      "budget": 0.2,
+      "sigma": 0.0,
+      "ratio": {
+        "oracle": 1.0,
+        "bp_aware": 0.9200494172796877,
+        "bp_blind": 0.9064619964209432,
+        "greedy": 0.907346657158802,
+        "threshold": 0.4960546014698981,
+        "all_exp": 0.18705132986067305,
+        "all_cheap": 0.907346657158802
+      },
+      "stuck_rate": {
+        "oracle": 0.0,
+        "bp_aware": 0.275,
+        "bp_blind": 0.355,
+        "greedy": 0.0,
+        "threshold": 0.82,
+        "all_exp": 0.155,
+        "all_cheap": 0.0
+      },
+      "voi_weighted_correct": [
+        1.0459141152325944,
+        0.09032758772930125,
+        1.9643941362622892
+      ]
+    },
+    {
+      "budget": 0.2,
+      "sigma": 0.1,
+      "ratio": {
+        "oracle": 1.0,
+        "bp_aware": 0.9170137986647802,
+        "bp_blind": 0.9064619964209432,
+        "greedy": 0.907346657158802,
+        "threshold": 0.4960546014698981,
+        "all_exp": 0.18705132986067305,
+        "all_cheap": 0.907346657158802
+      },
+      "stuck_rate": {
+        "oracle": 0.0,
+        "bp_aware": 0.31,
+        "bp_blind": 0.355,
+        "greedy": 0.0,
+        "threshold": 0.82,
+        "all_exp": 0.155,
+        "all_cheap": 0.0
+      },
+      "voi_weighted_correct": [
+        0.8313391659065578,
+        -0.14231399462856067,
+        1.7226782949478054
+      ]
+    },
+    {
+      "budget": 0.2,
+      "sigma": 0.2,
+      "ratio": {
+        "oracle": 1.0,
+        "bp_aware": 0.9131211384829234,
+        "bp_blind": 0.9064619964209432,
+        "greedy": 0.907346657158802,
+        "threshold": 0.4960546014698981,
+        "all_exp": 0.18705132986067305,
+        "all_cheap": 0.907346657158802
+      },
+      "stuck_rate": {
+        "oracle": 0.0,
+        "bp_aware": 0.35,
+        "bp_blind": 0.355,
+        "greedy": 0.0,
+        "threshold": 0.82,
+        "all_exp": 0.155,
+        "all_cheap": 0.0
+      },
+      "voi_weighted_correct": [
+        0.534679160332422,
+        -0.40358772106516666,
+        1.4978985214604252
+      ]
+    },
+    {
+      "budget": 0.2,
+      "sigma": 0.3,
+      "ratio": {
+        "oracle": 1.0,
+        "bp_aware": 0.9167727778130377,
+        "bp_blind": 0.9064619964209432,
+        "greedy": 0.907346657158802,
+        "threshold": 0.4960546014698981,
+        "all_exp": 0.18705132986067305,
+        "all_cheap": 0.907346657158802
+      },
+      "stuck_rate": {
+        "oracle": 0.0,
+        "bp_aware": 0.335,
+        "bp_blind": 0.355,
+        "greedy": 0.0,
+        "threshold": 0.82,
+        "all_exp": 0.155,
+        "all_cheap": 0.0
+      },
+      "voi_weighted_correct": [
+        0.8001470381068208,
+        -0.1088476186404184,
+        1.6837830845241721
+      ]
+    }
+  ]
+}

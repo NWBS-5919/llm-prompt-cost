@@ -35,6 +35,10 @@ opt = lambda k, d: type(d)(args[args.index(k) + 1]) if k in args else d
 DAYS, RESOLVE, N = opt("--days", 200), opt("--resolve", 5), opt("--n", 40)
 BUDGETS = [1.0, 0.6, 0.35, 0.2]                 # '전부 고가' 하루 비용 대비
 SIGMAS = [0.0, 0.1, 0.2, 0.3]                   # 결함 판별 오류율
+if "--budgets" in args:                         # 일부만 계산 (예: --budgets 0.2,0.35)
+    BUDGETS = [float(x) for x in args[args.index("--budgets") + 1].split(",")]
+if "--sigmas" in args:
+    SIGMAS = [float(x) for x in args[args.index("--sigmas") + 1].split(",")]
 WS = (1, 2, 3)
 SEED = 20261004
 V = P.VARIANTS
@@ -52,6 +56,10 @@ ok = lambda r, v: v in r["prompts"] and (v not in P.LLM_AXES or
                                          r["checks"].get(f"{v}_valid", r["checks"].get(f"{v}_same_answer", False)))
 train = [r for r in R if r["split"] == "train"]
 test = [r for r in R if r["split"] == "test"]
+# 보정(학습) 문항 수를 줄여 '추정 오차 vs 정보 가치' 곡선을 그릴 때 (D-39) — 시험 문항은 그대로
+if "--train-n" in args:
+    import random as _rnd
+    train = _rnd.Random(opt("--train-seed", 0)).sample(train, min(opt("--train-n", len(train)), len(train)))
 if not train or not test:
     raise SystemExit("학습/시험 문항이 모두 있어야 합니다 (파일럿이 너무 작으면 --limit 을 늘리세요)")
 # 조작 확인을 통과한 문항이 학습·시험 한쪽에라도 없으면 그 변형은 표를 만들 수 없다 → 빼고 알린다
